@@ -17,7 +17,7 @@ export function TodosForm({ addTask }: TodosFormProps) {
   }
 
   return (
-    <div className="flex justify-center w-[70%] h-14 m-8">
+    <div className="flex justify-center w-[70%] h-14 mt-8 mb-5">
       <input
         required
         type="text"
@@ -26,7 +26,7 @@ export function TodosForm({ addTask }: TodosFormProps) {
         onChange={(e) => setValue(e.currentTarget.value)}
         placeholder="What needs to be done?"
         onKeyDown={handleEnterKey}
-        className="bg-focuslightgrey w-full rounded-[20px] p-4 text-black font-kdam placeholder:text-focusgrey"
+        className="bg-focuslightgrey w-full rounded-[20px] p-4 text-black font-kdam text-[20px] placeholder:text-focusgrey"
       />
     </div>
   );
