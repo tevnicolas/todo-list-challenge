@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: 'Kdam Thmor Pro';
-  src: url('/public/fonts/Kdam_Thmor_Pro/KdamThmorPro-Regular.ttf') format('truetype');
+  src: url('/public/fonts/Kdam_Thmor_Pro/Kdam\ Thmor\ Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
@@ -22,12 +22,13 @@
   font-weight: 400;
 
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #dce7fc;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  justify-content: center;
 }
 
 a {
