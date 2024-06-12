@@ -3,15 +3,17 @@ import { Task } from './data';
 
 type TodosFormProps = {
   addTask: (_task: Task) => void;
+  tasks: Task[];
 };
 
-export function TodosForm({ addTask }: TodosFormProps) {
+export function TodosForm({ addTask, tasks }: TodosFormProps) {
   const [value, setValue] = useState('');
 
   function handleEnterKey(e: KeyboardEvent<HTMLInputElement>) {
+    const newId = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
     if (e.key !== 'Enter') return;
     e.preventDefault();
-    const newTask: Task = { content: value, done: false };
+    const newTask: Task = { content: value, done: false, id: newId };
     addTask(newTask);
     setValue('');
   }

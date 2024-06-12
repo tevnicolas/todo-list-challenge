@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import './TodosApp.css';
 import { TodosForm } from './TodosForm';
 import { TodosList } from './TodosList/TodosList';
-import { Task, readTasks } from './data';
+import { Task } from './data';
+// import { readExampleJSON } from './data';
 
 export function TodosApp() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -10,25 +11,38 @@ export function TodosApp() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchTasks(): Promise<void> {
+    async function loadTasks(): Promise<void> {
       try {
-        const fetched = await readTasks();
-        setTasks(fetched);
+        // uncomment two lines below to load from exampleJSON in data
+        // const exampleTasks = await readExampleJSON();
+        // setTasks(exampleTasks);
+
+        // comment out two lines below to load from exampleJSON
+        const localData = localStorage.getItem('tasks');
+        setTasks(localData ? JSON.parse(localData) : []);
       } catch (error) {
         setError(error);
       } finally {
         setIsLoading(false);
       }
     }
-    fetchTasks();
+    loadTasks();
   }, []);
 
   function addTask(task: Task): void {
-    setTasks((prevTasks) => [task, ...prevTasks]);
+    setTasks((prevTasks) => {
+      const updatedTasks = [task, ...prevTasks];
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      return updatedTasks;
+    });
   }
 
-  function toggleDone(index: number): void {
-    setTasks((prevTasks) => prevTasks.map((task, i) => (i === index ? { ...task, done: !task.done } : task)));
+  function toggleDone(id: number): void {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((task) => (task.id === id ? { ...task, done: !task.done } : task));
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      return updatedTasks;
+    });
   }
 
   return (
@@ -38,7 +52,7 @@ export function TodosApp() {
         <h3 className="font-kanit text-black">by Tev Nicolas</h3>
       </div>
       <div className="flex flex-col flex-wrap justify-start items-center h-[500px] min-w-[420px] max-w-[620px] w-full rounded-[80px] bg-focuswhite border-focusblue border-[16px]">
-        <TodosForm addTask={addTask} />
+        <TodosForm addTask={addTask} tasks={tasks} />
         {error ? (
           <div>
             <p>{`Error: ${error}. Try reloading the page.`}</p>
