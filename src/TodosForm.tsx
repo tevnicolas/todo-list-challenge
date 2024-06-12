@@ -10,9 +10,9 @@ export function TodosForm({ addTask, tasks }: TodosFormProps) {
   const [value, setValue] = useState('');
 
   function handleEnterKey(e: KeyboardEvent<HTMLInputElement>) {
-    const newId = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
     if (e.key !== 'Enter') return;
     e.preventDefault();
+    const newId = tasks.length ? Math.max(...tasks.map((task) => task.id)) + 1 : 1;
     const newTask: Task = { content: value, done: false, id: newId };
     addTask(newTask);
     setValue('');

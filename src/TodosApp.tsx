@@ -45,6 +45,15 @@ export function TodosApp() {
     });
   }
 
+  function deleteTask(id: number): void {
+    console.log('Deleting task with id:', id);
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.filter((task) => task.id !== id);
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      return updatedTasks;
+    });
+  }
+
   return (
     <div className="flex flex-wrap justify-center items-start w-[70vw] max-w-[800px] min-w-[420px] h-[700px] bg-papayawhip">
       <div className="w-full">
@@ -62,7 +71,7 @@ export function TodosApp() {
             <p>Loading</p>
           </div>
         ) : (
-          <TodosList tasks={tasks} toggleDone={toggleDone} />
+          <TodosList tasks={tasks} toggleDone={toggleDone} deleteTask={deleteTask} />
         )}
       </div>
     </div>

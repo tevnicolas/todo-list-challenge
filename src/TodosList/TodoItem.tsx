@@ -1,13 +1,15 @@
 import { Task } from '../data';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 type TodoItemProps = {
   task: Task;
-  toggleDone: (_index: number) => void;
+  toggleDone: (_id: number) => void;
+  deleteTask: (_id: number) => void;
 };
 
-export function TodoItem({ task, toggleDone }: TodoItemProps) {
+export function TodoItem({ task, toggleDone, deleteTask }: TodoItemProps) {
   return (
-    <li className="flex items-start w-full max-w-full">
+    <li className="flex items-start w-full max-w-full hover:bg-focuslightgrey group">
       <div className="m-2">
         <button
           type="button"
@@ -21,6 +23,15 @@ export function TodoItem({ task, toggleDone }: TodoItemProps) {
       >
         {task.content}
       </p>
+      <div className="flex items-center justify-end h-full w-full mr-2">
+        <FaRegTrashAlt
+          onClick={() => {
+            console.log('Trash icon clicked for task id:', task.id);
+            deleteTask(task.id);
+          }}
+          className="group-hover:fill-[rgb(139,139,139)]"
+        />
+      </div>
     </li>
   );
 }
