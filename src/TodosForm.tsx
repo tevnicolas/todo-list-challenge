@@ -21,7 +21,6 @@ export function TodosForm({ addTask, tasks }: TodosFormProps) {
   return (
     <div className="flex justify-center w-[70%] h-14 mt-8 mb-5">
       <input
-        required
         type="text"
         name="newTodo"
         value={value}

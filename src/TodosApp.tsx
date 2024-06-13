@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, DragEvent } from 'react';
 import './TodosApp.css';
 import { TodosForm } from './TodosForm';
 import { TodosList } from './TodosList/TodosList';
 import { Task, Visibility } from './data';
 import { BottomIndicators } from './BottomIndicators/BottomIndicators';
-// import { readExampleJSON } from './data';
 
 export function TodosApp() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [error, setError] = useState<unknown>();
   const [isLoading, setIsLoading] = useState(true);
   const [visibility, setVisibility] = useState<Visibility>('all');
+  const [draggingIndex, setDraggingIndex] = useState<number | undefined>();
 
   const visibilityOptions = {
     all: tasks,
@@ -47,26 +47,41 @@ export function TodosApp() {
 
   function toggleDone(id: number): void {
     setTasks((prevTasks) => {
-      const updatedTasks = prevTasks.map((task) => (task.id === id ? { ...task, done: !task.done } : task));
-      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-      return updatedTasks;
+      const newTasks = prevTasks.map((task) => (task.id === id ? { ...task, done: !task.done } : task));
+      localStorage.setItem('tasks', JSON.stringify(newTasks));
+      return newTasks;
     });
   }
 
   function deleteTask(id: number): void {
     setTasks((prevTasks) => {
-      const updatedTasks = prevTasks.filter((task) => task.id !== id);
-      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-      return updatedTasks;
+      const newTasks = prevTasks.filter((task) => task.id !== id);
+      localStorage.setItem('tasks', JSON.stringify(newTasks));
+      return newTasks;
     });
   }
 
   function clearCompleted(): void {
     setTasks((prevTasks) => {
-      const updatedTasks = prevTasks.filter((task) => task.done !== true);
-      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-      return updatedTasks;
+      const newTasks = prevTasks.filter((task) => task.done !== true);
+      localStorage.setItem('tasks', JSON.stringify(newTasks));
+      return newTasks;
     });
+  }
+
+  function handleDragOver(index: number, e: DragEvent<HTMLLIElement>) {
+    e.preventDefault();
+    if (draggingIndex === index || draggingIndex === undefined) return;
+    const newTasks = [...tasks];
+    const [draggedTask] = newTasks.splice(draggingIndex, 1);
+    newTasks.splice(index, 0, draggedTask);
+    setDraggingIndex(index);
+    setTasks(newTasks);
+  }
+
+  function handleDrop() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    setDraggingIndex(undefined);
   }
 
   return (
@@ -91,7 +106,14 @@ export function TodosApp() {
               </div>
             </div>
           ) : (
-            <TodosList visibleTasks={visibilityOptions[visibility]} toggleDone={toggleDone} deleteTask={deleteTask} />
+            <TodosList
+              visibleTasks={visibilityOptions[visibility]}
+              toggleDone={toggleDone}
+              deleteTask={deleteTask}
+              handleDragStart={setDraggingIndex}
+              handleDragOver={handleDragOver}
+              handleDrop={handleDrop}
+            />
           )}
           <BottomIndicators
             tasksLeft={visibilityOptions['active'].length}
