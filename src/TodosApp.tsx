@@ -46,9 +46,16 @@ export function TodosApp() {
   }
 
   function deleteTask(id: number): void {
-    console.log('Deleting task with id:', id);
     setTasks((prevTasks) => {
       const updatedTasks = prevTasks.filter((task) => task.id !== id);
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      return updatedTasks;
+    });
+  }
+
+  function clearCompleted(): void {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.filter((task) => task.done !== true);
       localStorage.setItem('tasks', JSON.stringify(updatedTasks));
       return updatedTasks;
     });
@@ -71,7 +78,7 @@ export function TodosApp() {
             <p>Loading</p>
           </div>
         ) : (
-          <TodosList tasks={tasks} toggleDone={toggleDone} deleteTask={deleteTask} />
+          <TodosList tasks={tasks} toggleDone={toggleDone} deleteTask={deleteTask} clearCompleted={clearCompleted} />
         )}
       </div>
     </div>
