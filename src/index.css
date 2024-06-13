@@ -4,14 +4,14 @@
 
 @font-face {
   font-family: 'Kanit';
-  src: url('/public/fonts/Kanit/Kanit-Bold.ttf') format('truetype');
+  src: url('/fonts/Kanit/Kanit-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Kdam Thmor Pro';
-  src: url('/public/fonts/Kdam_Thmor_Pro/Kdam\ Thmor\ Regular.ttf') format('truetype');
+  src: url('/fonts/Kdam_Thmor_Pro/Kdam\ Thmor\ Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }

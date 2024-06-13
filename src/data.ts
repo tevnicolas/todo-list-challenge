@@ -4,20 +4,22 @@ export type Task = {
   id: number;
 };
 
-const mockJSONObject = `
+export type Visibility = 'all' | 'active' | 'complete';
+
+const exampleJSON = `
 {
   "tasks": [
-    { "content": "Buy milk", "done": false, "id": 1 },
-    { "content": "Take car in for oil change", "done": true, "id": 2 },
-    { "content": "Pick up birthday present for Mom", "done": false, "id": 3 },
-    { "content": "Call Sam", "done": true, "id": 4 }
+    { "content": "Buy milk", "done": false, "id": 704 },
+    { "content": "Take car in for oil change", "done": true, "id": 705 },
+    { "content": "Pick up birthday present for Mom", "done": false, "id": 706 },
+    { "content": "Call Sam", "done": true, "id": 707 }
   ]
 }
 `;
 
-export async function readTasks(): Promise<Task[]> {
-  // this line would be a fetch request
-  const response = new Response(mockJSONObject, {
+export async function readExampleJSON(): Promise<Task[]> {
+  // fetch request here
+  const response = new Response(exampleJSON, {
     headers: { 'Content-Type': 'application/json' },
   });
   const result = await response.json();

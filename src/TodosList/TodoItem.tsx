@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Task } from '../data';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { FaCheck } from 'react-icons/fa6';
@@ -9,8 +10,19 @@ type TodoItemProps = {
 };
 
 export function TodoItem({ task, toggleDone, deleteTask }: TodoItemProps) {
+  const [isFading, setIsFading] = useState(false);
+
+  function handleDeleteWithFade() {
+    setIsFading(true);
+    setTimeout(() => {
+      deleteTask(task.id);
+    }, 400); // Duration of the fade-out animation
+  }
+
   return (
-    <li className="flex items-start w-full max-w-full hover:bg-focuslightgrey group">
+    <li
+      className={`flex items-start w-full max-w-full hover:bg-focuslightgrey group opacity-0 animate-fadeIn ${isFading && 'animate-fadeOut'}`}
+    >
       <div className="m-2 pb-[5px]">
         <button
           type="button"
@@ -27,7 +39,7 @@ export function TodoItem({ task, toggleDone, deleteTask }: TodoItemProps) {
         {task.content}
       </p>
       <div className="flex items-center justify-end h-full w-full mr-2">
-        <FaRegTrashAlt onClick={() => deleteTask(task.id)} className="group-hover:fill-[rgb(139,139,139)]" />
+        <FaRegTrashAlt onClick={handleDeleteWithFade} className="group-hover:fill-[rgb(139,139,139)]" />
       </div>
     </li>
   );
