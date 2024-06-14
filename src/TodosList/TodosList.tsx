@@ -22,7 +22,7 @@ export function TodosList({
   handleKeyDown,
 }: TodosListProps) {
   return (
-    <ul className="flex flex-col items-start ml-[14.5%] mr-[14.5%] pl-2 pr-2 overflow-y-auto max-w-full h-full max-h-[280px] break-words">
+    <ul className="flex flex-col items-start ml-[14.5%] mr-[14.5%] pt-1 pb-1 pl-2 pr-2 overflow-y-auto max-w-full h-full max-h-[390px] break-words">
       {visibleTasks.map((task, i) => (
         <TodoItem
           key={task.id}

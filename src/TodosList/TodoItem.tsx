@@ -22,7 +22,8 @@ export function TodoItem({
   handleDrop,
   handleKeyDown,
 }: TodoItemProps) {
-  const [isFading, setIsFading] = useState(false);
+  const [isFading, setIsFading] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   function handleDeleteWithFade() {
     setIsFading(true);
@@ -33,13 +34,21 @@ export function TodoItem({
 
   return (
     <li
-      className={`flex items-center w-full max-w-full hover:bg-focuslightgrey group opacity-0 animate-fadeIn ${isFading && 'animate-fadeOut'}`}
+      className={`flex items-center w-full max-w-full hover:bg-focuslightgrey focus:bg-focuslightgrey group opacity-0 animate-fadeIn ${isFading && 'animate-fadeOut'} ${isFocused && 'ring ring-focusblue'}`}
       draggable
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
-      <div className="flex item-start mt-[6px] mb-[6px] w-full" onKeyDown={handleKeyDown} tabIndex={0} role="button">
+      <div
+        className="flex item-start mt-[6px] mb-[6px] w-full focus:outline-none"
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        role="button"
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        onClick={() => setIsFocused(true)}
+      >
         <div className="m-2">
           <button
             type="button"

@@ -15,7 +15,7 @@ export function BottomIndicators({
   clearCompleted,
 }: BottomIndicatorsProps) {
   return (
-    <div className="flex justify-center pr-9">
+    <div className="flex justify-center pr-9 pt-[15px]">
       <div className="flex justify-start items-center w-full">
         <p className="text-focuslightblue ml-20 mt-1 pr-2 text-[14px] font-medium font-inherit min-w-[68px]">{`${tasksLeft} ${tasksLeft === 1 ? 'task' : 'tasks'} left`}</p>
       </div>

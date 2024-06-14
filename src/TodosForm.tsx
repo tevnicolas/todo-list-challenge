@@ -6,9 +6,19 @@ type TodosFormProps = {
   tasks: Task[];
 };
 
+/**
+ * Form component for adding new tasks to the todo list.
+ * Includes an input field for task content and handles adding the task on pressing Enter.
+ */
 export function TodosForm({ addTask, tasks }: TodosFormProps) {
   const [value, setValue] = useState('');
 
+  /**
+   * Handles the Enter key event to add a new task.
+   * Creates a new task with a unique ID and adds it to the task list.
+   *
+   * @param {KeyboardEvent<HTMLInputElement>} e - The keyboard event object.
+   */
   function handleEnterKey(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key !== 'Enter' || !value) return;
     e.preventDefault();
@@ -19,7 +29,7 @@ export function TodosForm({ addTask, tasks }: TodosFormProps) {
   }
 
   return (
-    <div className="flex justify-center w-[70%] h-14 mt-8 mb-5">
+    <div className="flex justify-center w-[70%] h-14 mt-8 mb-3">
       <input
         type="text"
         name="newTodo"
