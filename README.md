@@ -14,14 +14,14 @@ Todo List is a simple and interactive todo list application built with React, Ty
 3) Allows filtering tasks by status (done/undone).
 4) Made the application beautiful with TailwindCSS
 5) Optional Features implemented:
-  a. Allows receiving an initial JSON object
-  b. Persists application state and persists on refresh using localStorage
-  e. Added a “remove completed tasks” button.
-  f. Allow manual re-ordering of tasks using drag and drop.
-  h. Add extra keyboard navigation to improve accessibility:
-    i. Enter key while writing a new task adds it to the list.
-    ii. Pressing up/down arrows having a task focused allows reordering.
-    iii. Tasks can be marked as done/undone using 'x' key.
+    a. Allows receiving an initial JSON object
+    b. Persists application state and persists on refresh using localStorage
+    e. Added a “remove completed tasks” button.
+    f. Allow manual re-ordering of tasks using drag and drop.
+    h. Add extra keyboard navigation to improve accessibility
+      i. Enter key while writing a new task adds it to the list.
+      ii. Pressing up/down arrows having a task focused allows reordering.
+      iii. Tasks can be marked as done/undone using 'x' key.
 
 
 
