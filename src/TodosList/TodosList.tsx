@@ -1,6 +1,6 @@
 import { Task } from '../data';
 import { TodoItem } from './TodoItem';
-import { DragEvent } from 'react';
+import { DragEvent, KeyboardEvent } from 'react';
 
 type TodosListProps = {
   visibleTasks: Task[];
@@ -9,6 +9,7 @@ type TodosListProps = {
   handleDragStart: (_index: number) => void;
   handleDragOver: (_index: number, _e: DragEvent<HTMLLIElement>) => void;
   handleDrop: () => void;
+  handleKeyDown: (_id: number, _index: number, _e: KeyboardEvent<HTMLDivElement>) => void;
 };
 
 export function TodosList({
@@ -18,9 +19,10 @@ export function TodosList({
   handleDragStart,
   handleDragOver,
   handleDrop,
+  handleKeyDown,
 }: TodosListProps) {
   return (
-    <ul className="flex flex-col items-start ml-[15%] mr-[20%] overflow-y-auto max-w-full h-full max-h-[280px] break-words">
+    <ul className="flex flex-col items-start ml-[14.5%] mr-[14.5%] pl-2 pr-2 overflow-y-auto max-w-full h-full max-h-[280px] break-words">
       {visibleTasks.map((task, i) => (
         <TodoItem
           key={task.id}
@@ -30,6 +32,7 @@ export function TodosList({
           handleDragStart={() => handleDragStart(i)}
           handleDragOver={(e) => handleDragOver(i, e)}
           handleDrop={handleDrop}
+          handleKeyDown={(e) => handleKeyDown(task.id, i, e)}
         />
       ))}
       s

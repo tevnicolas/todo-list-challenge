@@ -1,4 +1,4 @@
-import { useState, DragEvent } from 'react';
+import { useState, DragEvent, KeyboardEvent } from 'react';
 import { Task } from '../data';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { FaCheck } from 'react-icons/fa6';
@@ -10,9 +10,18 @@ type TodoItemProps = {
   handleDragStart: () => void;
   handleDragOver: (_e: DragEvent<HTMLLIElement>) => void;
   handleDrop: () => void;
+  handleKeyDown: (_e: KeyboardEvent<HTMLDivElement>) => void;
 };
 
-export function TodoItem({ task, toggleDone, deleteTask, handleDragStart, handleDragOver, handleDrop }: TodoItemProps) {
+export function TodoItem({
+  task,
+  toggleDone,
+  deleteTask,
+  handleDragStart,
+  handleDragOver,
+  handleDrop,
+  handleKeyDown,
+}: TodoItemProps) {
   const [isFading, setIsFading] = useState(false);
 
   function handleDeleteWithFade() {
@@ -30,7 +39,7 @@ export function TodoItem({ task, toggleDone, deleteTask, handleDragStart, handle
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
-      <div className="flex item-start mt-[6px] mb-[6px] w-full">
+      <div className="flex item-start mt-[6px] mb-[6px] w-full" onKeyDown={handleKeyDown} tabIndex={0} role="button">
         <div className="m-2">
           <button
             type="button"

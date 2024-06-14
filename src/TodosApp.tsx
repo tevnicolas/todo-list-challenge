@@ -1,9 +1,11 @@
-import { useEffect, useState, DragEvent } from 'react';
+import { useEffect, useState, DragEvent, KeyboardEvent } from 'react';
 import './TodosApp.css';
 import { TodosForm } from './TodosForm';
 import { TodosList } from './TodosList/TodosList';
 import { Task, Visibility } from './data';
 import { BottomIndicators } from './BottomIndicators/BottomIndicators';
+// (1) uncomment line below to load from exampleJSON object
+// import { readExampleJSON } from './data';
 
 export function TodosApp() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -21,11 +23,11 @@ export function TodosApp() {
   useEffect(() => {
     async function loadTasks(): Promise<void> {
       try {
-        // uncomment two lines below to load from exampleJSON in data
-        // const exampleTasks = await readExampleJSON();
-        // setTasks(exampleTasks);
+        // (2) uncomment two lines below to load from exampleJSON object
+        // const exampleJSONTasks = await readExampleJSON();
+        // setTasks(exampleJSONTasks);
 
-        // comment out two lines below to load from exampleJSON
+        // (3) comment out two lines below to load from exampleJSON object
         const localData = localStorage.getItem('tasks');
         setTasks(localData ? JSON.parse(localData) : []);
       } catch (error) {
@@ -84,6 +86,29 @@ export function TodosApp() {
     setDraggingIndex(undefined);
   }
 
+  function handleKeyUpDownX(id: number, index: number, e: KeyboardEvent<HTMLDivElement>) {
+    const newTasks = [...tasks];
+    if (e.key === 'ArrowUp' && index) {
+      e.preventDefault();
+      const [selectedTask] = newTasks.splice(index, 1);
+      newTasks.splice(index - 1, 0, selectedTask);
+      setDraggingIndex(index - 1);
+    } else if (e.key === 'ArrowDown' && index < tasks.length - 1) {
+      e.preventDefault();
+      const [selectedTask] = newTasks.splice(index, 1);
+      newTasks.splice(index + 1, 0, selectedTask);
+      setDraggingIndex(index + 1);
+    } else if (e.key === 'x') {
+      e.preventDefault();
+      console.log(`Key pressed: ${e.key}`);
+      console.log('id: ', id);
+      toggleDone(id);
+    }
+    setTasks(newTasks);
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
+    setDraggingIndex(undefined);
+  }
+
   return (
     <div className="flex flex-wrap justify-center items-start w-[70vw] max-w-[800px] min-w-[420px] h-[700px] bg-papayawhip opacity-0 animate-fadeIn">
       <div className="w-full opacity-0 animate-fadeIn2">
@@ -113,6 +138,7 @@ export function TodosApp() {
               handleDragStart={setDraggingIndex}
               handleDragOver={handleDragOver}
               handleDrop={handleDrop}
+              handleKeyDown={handleKeyUpDownX}
             />
           )}
           <BottomIndicators

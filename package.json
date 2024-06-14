@@ -1,13 +1,13 @@
 {
-  "name": "focus-360-todo-list",
+  "name": "focus360-todo-list",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "http://tevnicolas.github.io/focus360-todo-list",
+  "homepage": "https://tevnicolas.github.io/focus360-todo-list",
   "scripts": {
     "build": "tsc && vite build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "dev": "vite"
