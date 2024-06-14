@@ -1,4 +1,4 @@
-# Todo List
+# Todo List by Tev Nicolas
 
 Todo List is a simple and interactive todo list application built with React, TypeScript, Vite, and Tailwind CSS. The app allows users to add, complete, and delete tasks, as well as filter tasks based on their completion status.
 
