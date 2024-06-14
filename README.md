@@ -1,30 +1,100 @@
-# React + TypeScript + Vite
+# Todo List
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Todo List is a simple and interactive todo list application built with React, TypeScript, Vite, and Tailwind CSS. The app allows users to add, complete, and delete tasks, as well as filter tasks based on their completion status.
 
-Currently, two official plugins are available:
+## Features Implemented from Challenge Directions
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1) Created ToDo Application that supports the following:
+  a. Adding new tasks
+  b. Marking tasks as done
+  c. Listing all tasks
+  d. Show a visual cue to differentiate active from completed tasks
 
-## Expanding the ESLint configuration
+2) Allow tasks to be removed (not just marked as done).
+3) Allows filtering tasks by status (done/undone).
+4) Made the application beautiful with TailwindCSS
+5) Optional Features implemented:
+  a. Allows receiving an initial JSON object
+  b. Persists application state and persists on refresh using localStorage
+  e. Added a “remove completed tasks” button.
+  f. Allow manual re-ordering of tasks using drag and drop.
+  h. Add extra keyboard navigation to improve accessibility:
+    i. Enter key while writing a new task adds it to the list.
+    ii. Pressing up/down arrows having a task focused allows reordering.
+    iii. Tasks can be marked as done/undone using 'x' key.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Technologies Used / Prerequisites
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **React**: A JavaScript library for building user interfaces
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript
+- **Vite**: A fast and optimized build tool for modern web projects
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development
+- Also needed: Node.js, npm
+
+## Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine.
+
+
+### Installation / Running the Application
+
+1. Clone the repository
+
+2. Install dependencies with 'npm i'
+
+3. Start the development server
+
+    ```sh
+    npm run dev
+    ```
+
+    or
+
+    ```sh
+    yarn dev
+    ```
+
+4. Open your browser and navigate to the localhost link
+
+### Building for Production
+
+1. Build the project
+
+    ```sh
+    npm run build
+    ```
+
+    or
+
+    ```sh
+    yarn build
+    ```
+
+2. Deploy the contents of the `dist` directory to your preferred hosting service
+
+### Deploying to GitHub Pages
+
+1. Update the `vite.config.js` file to set the correct base path
+
+    ```javascript
+    // vite.config.js
+    export default {
+      base: '/focus360-todo-list/',
+      // other config options...
+    }
+    ```
+
+2. Deploy using `gh-pages`
+
+    ```sh
+    npx gh-pages -d dist
+    ```
+
+## Acknowledgements
+
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
